@@ -29,9 +29,11 @@ export function signupSchema(req: any, res: any, next: any): any {
   const schema = Joi.object({
     name: Joi.string().min(3).required(),
     email: Joi.string().email().lowercase().required(),
-    password: Joi.string().min(2).required(),
+    password: Joi.string().min(3).required(), // Updated password rule to min(3)
     phone: Joi.string().required(),
-    usertype: Joi.string().required(),
+    usertype: Joi.string()
+      .valid("restaurant_owner", "delivery_person", "customer")
+      .required(), // Added specific valid user types
   });
 
   const validationsObj = new validations();
@@ -154,7 +156,7 @@ async function addAddress(req: any, res: Response): Promise<any> {
   const functionsObj = new functions();
   try {
     // Create an instance of dbAddress
-    const addressObj = new dbAddress(); 
+    const addressObj = new dbAddress();
     const newAddress = await addressObj.createAddress({
       ...req.body,
       user_id: req.user.id,
