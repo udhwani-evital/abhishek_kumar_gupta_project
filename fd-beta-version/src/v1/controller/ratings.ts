@@ -47,7 +47,7 @@ async function createRating(req: any, res: any): Promise<any> {
       functionsObj.output(1, "Rating added successfully", newRating)
     );
   } catch (error: any) {
-    console.log("Error adding rating:", error);
+    
     return res.send(
       functionsObj.output(0, "Rating couldn't be added due to some issues")
     );

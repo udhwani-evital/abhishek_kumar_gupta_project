@@ -68,7 +68,7 @@ export class dbCartItems extends appdb {
       };
       return data;
     } else {
-      const result = await this.insert("cartitems", {
+      const result = await this.insertRecord({
         cart_id: cartId,
         food_item_id: foodItemId,
         quantity: quantity,

@@ -86,7 +86,7 @@ async function signup(req: any, res: any): Promise<any> {
     const existingUser = await usersObj.getUserByEmail(user_email);
     if (existingUser) {
       res.send(functionsObj.output(0, "User with this email aldready exists"));
-      console.log("hello f");
+     
       return false;
     }
     const result: any = await usersObj.insertUser({
@@ -142,7 +142,7 @@ async function login(req: any, res: any): Promise<any> {
       results: user,
       token: token,
     };
-    console.log("data", data);
+   
     res.send(functionsObj.output(1, "User logged in successfully", data));
     return false;
   } catch (error) {

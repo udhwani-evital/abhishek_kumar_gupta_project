@@ -36,7 +36,7 @@ async function createOrder(req: any, res: Response) {
       restaurant_id,
       cartItems.totalamount
     );
-    console.log("order_details", order);
+ 
 
     let orderitemsObj = new dbOrderItems();
 
@@ -65,7 +65,7 @@ async function createOrder(req: any, res: Response) {
 
 async function fetchOrders(req: any, res: Response) {
   try {
-    console.log("Fetching orders for user", req.user.id);
+
     let ordersObj = new dborders();
     // Get order details for the user
     let user_id = req.user.id;
@@ -79,7 +79,7 @@ async function fetchOrders(req: any, res: Response) {
       res.send(functionsObj.output(0, "Orders not found"));
     }
   } catch (error: any) {
-    console.error("Order fetching error:", error);
+   
     res.send(functionsObj.output(0, "Internal server error"));
   }
 }

@@ -48,8 +48,6 @@ async function createPayment(req: any, res: Response): Promise<any> {
       paymentMethod,
       totalAmount
     );
-    if (paymentDetails) {
-    }
     // Fetch a delivery person ID
     const deliveryObj = new dbDeliveries();
     const deliveryPersonId = await deliveryObj.getDeliveryPersonId();

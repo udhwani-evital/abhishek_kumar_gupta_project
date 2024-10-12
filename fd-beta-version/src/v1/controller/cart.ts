@@ -34,7 +34,6 @@ async function addItemToCart(req: any, res: any): Promise<any> {
   try {
     const { foodItemId, quantity, price } = req.body;
 
-    console.log("req.body of cart.ts", req.body);
 
     const userId = req.user.id;
 
