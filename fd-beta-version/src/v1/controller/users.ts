@@ -1,10 +1,29 @@
 import express from "express";
+import { Request, Response, NextFunction } from "express";
 import Joi from "joi";
 import { filefunctions } from "../library/filefunctions";
 import { functions } from "../library/functions";
 import { validations } from "../library/validations";
+import { dbAddress } from "../model/dbaddress";
 import { dbusers } from "../model/dbusers";
 import jwt from "jsonwebtoken";
+
+export function addressSchema(req: any, res: any, next: any): any {
+  const schema = Joi.object({
+    state: Joi.string().min(2).required(),
+    street: Joi.string().min(3).required(),
+    city: Joi.string().min(2).required(),
+    pincode: Joi.number().required(),
+  });
+  const validationsObj = new validations();
+  const isValid = validationsObj.validateRequest(req, res, next, schema);
+
+  if (!isValid) {
+    return false;
+  }
+
+  next();
+}
 
 export function signupSchema(req: any, res: any, next: any): any {
   const schema = Joi.object({
@@ -45,6 +64,7 @@ export function loginSchema(req: any, res: any, next: any): any {
 const router = express.Router();
 router.post("/signup", signupSchema, signup);
 router.post("/login", loginSchema, login);
+router.post("/add_address", addressSchema, addAddress);
 
 module.exports = router;
 
@@ -127,5 +147,23 @@ async function login(req: any, res: any): Promise<any> {
     console.log(error);
     res.send(functionsObj.output(0, "Internal Server Error"));
     return false;
+  }
+}
+
+async function addAddress(req: any, res: Response): Promise<any> {
+  const functionsObj = new functions();
+  try {
+    // Create an instance of dbAddress
+    const addressObj = new dbAddress(); 
+    const newAddress = await addressObj.createAddress({
+      ...req.body,
+      user_id: req.user.id,
+    });
+
+    res.send(
+      functionsObj.output(1, "Address created successfully", newAddress)
+    );
+  } catch (error: any) {
+    res.send(functionsObj.output(0, "Failed to create address"));
   }
 }
