@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import { dborders } from "../model/dborders";
 import { dbPayments } from "../model/dbpayments";
 import { dbDeliveries } from "../model/dbdeliveries";
+import { dbusers } from "../model/dbusers";
 import { validations } from "../library/validations";
 import { functions } from "../library/functions";
 import Joi from "joi";
@@ -43,15 +44,21 @@ async function createPayment(req: any, res: Response): Promise<any> {
 
     // Insert payment record
     const paymentsObj = new dbPayments();
-    const paymentDetails = await paymentsObj.createPayment(
+    const paymentDetails = await paymentsObj.insertRecord({
       orderId,
       paymentMethod,
-      totalAmount
-    );
+      totalAmount,
+    });
     // Fetch a delivery person ID
     const deliveryObj = new dbDeliveries();
-    const deliveryPersonId = await deliveryObj.getDeliveryPersonId();
+    const usersObj = new dbusers();
+    usersObj.where = `WHERE userType = 'delivery_person'`;
 
+    const result = await usersObj.allRecords();
+    if (!result || result.length === 0) {
+      throw new Error("No delivery person found.");
+    }
+    let deliveryPersonId = result[0].id;
     // Create the delivery record
     const deliveryDetails = await deliveryObj.createDelivery(
       orderId,

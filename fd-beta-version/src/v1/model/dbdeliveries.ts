@@ -7,17 +7,17 @@ export class dbDeliveries extends appdb {
     this.uniqueField = "id";
   }
 
-  async getDeliveryPersonId(): Promise<number> {
-    this.table = "users";
-    this.where = `WHERE userType = 'delivery_person'`;
-    const result = await this.allRecords("id");
+  // async getDeliveryPersonId(): Promise<number> {
+  //   this.table = "users";
+  //   this.where = `WHERE userType = 'delivery_person'`;
+  //   const result = await this.allRecords("id");
 
-    if (!result || result.length === 0) {
-      throw new Error("No delivery person found.");
-    }
+    // if (!result || result.length === 0) {
+    //   throw new Error("No delivery person found.");
+    // }
 
-    return result[0].id;
-  }
+  //   return result[0].id;
+  // }
 
   async createDelivery(
     orderId: number,
