@@ -154,13 +154,17 @@ async function login(req: any, res: any): Promise<any> {
 
 async function addAddress(req: any, res: Response): Promise<any> {
   const functionsObj = new functions();
+
+
   try {
     // Create an instance of dbAddress
     const addressObj = new dbAddress();
-    const newAddress = await addressObj.createAddress({
+    let addressData = {
       ...req.body,
       user_id: req.user.id,
-    });
+    }
+    const newAddress = await addressObj.insertRecord(addressData);
+  
 
     res.send(
       functionsObj.output(1, "Address created successfully", newAddress)
