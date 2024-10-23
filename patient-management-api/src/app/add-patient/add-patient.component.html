@@ -16,7 +16,8 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Mobile*</mat-label>
-    <input matInput formControlName="mobile" type="text" />
+    <input matInput formControlName="mobile" type="text" maxlength="10"
+    (keypress)="preventExtraDigits($event)"/>
     <mat-error
       *ngIf="
         patientForm.get('mobile')?.invalid && patientForm.get('mobile')?.touched

@@ -15,10 +15,7 @@ export class ViewPatientComponent implements OnInit, OnDestroy {
   error = '';
   private errorSub!: Subscription;
 
-  constructor(
-    private http: HttpClient,
-    private patientService: PatientService
-  ) {}
+  constructor(private patientService: PatientService) {}
 
   ngOnInit(): void {
     this.errorSub = this.patientService.error.subscribe((errorMessage) => {

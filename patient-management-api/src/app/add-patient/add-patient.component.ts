@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CanComponentDeactivate } from './can-deactivate-guard.service';
 import { Observable, Subscription } from 'rxjs';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { PatientService } from '../patient.service';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-add-patient',
@@ -20,7 +21,8 @@ export class AddPatientComponent implements OnInit, CanComponentDeactivate {
   constructor(
     private patientService: PatientService,
     private router: Router,
-    private route: ActivatedRoute
+
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -29,6 +31,7 @@ export class AddPatientComponent implements OnInit, CanComponentDeactivate {
       mobile: new FormControl('', [
         Validators.required,
         Validators.pattern('^(?:[1-9][0-9]{9})$'),
+ 
       ]),
       first_name: new FormControl('', [
         Validators.required,
@@ -76,12 +79,15 @@ export class AddPatientComponent implements OnInit, CanComponentDeactivate {
       this.PatientData = this.patientForm.value;
       if (this.PatientData) {
         this.patientService.createPatient(this.patientForm.value);
-
-        console.log('Form Submitted!', this.patientForm.value);
-        this.router.navigate(['/view-patient']);
+        this._snackBar.open('Form submitted successfully!', 'Close', {
+          duration: 3000,
+          verticalPosition: 'bottom',
+          horizontalPosition: 'center',
+        });
       }
 
       localStorage.removeItem('patientFormData');
+      this.onReset();
     } else {
       console.log('Form is invalid!');
     }
@@ -96,6 +102,15 @@ export class AddPatientComponent implements OnInit, CanComponentDeactivate {
       return confirm('Do you want to discard the changes?');
     } else {
       return true;
+    }
+  }
+  preventExtraDigits(event: KeyboardEvent): void {
+    const input = event.target as HTMLInputElement;
+    const currentValue = input.value;
+
+   
+    if (currentValue.length >= 10) {
+      event.preventDefault(); 
     }
   }
 }

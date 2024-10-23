@@ -4,6 +4,7 @@ import { AddPatientComponent } from './add-patient/add-patient.component';
 
 import { ViewPatientComponent } from './view-patient/view-patient.component';
 import { CanDeactivateGuard } from './add-patient/can-deactivate-guard.service';
+// import { ViewPatientResolverService } from './view-patient/view-patient-resolver.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'view-patient', pathMatch: 'full' },
@@ -12,7 +13,11 @@ const routes: Routes = [
     component: AddPatientComponent,
     canDeactivate: [CanDeactivateGuard],
   },
-  { path: 'view-patient', component: ViewPatientComponent },
+  {
+    path: 'view-patient',
+    component: ViewPatientComponent,
+    // resolve: [ViewPatientResolverService],
+  },
 ];
 
 @NgModule({

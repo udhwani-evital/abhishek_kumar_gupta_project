@@ -45,8 +45,8 @@ h2.patient-title {
 }
 
 .alert {
-  background-color: #f44336d6; /* Red background */
-  color: white; /* White text */
+  background-color: #f443365e; /* Red background */
+  color:red; /* White text */
   padding: 16px;
   position: fixed;
   top: 5rem; /* Adjust as needed */

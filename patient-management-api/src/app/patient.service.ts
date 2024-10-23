@@ -26,7 +26,7 @@ export class PatientService {
       })
       .subscribe(
         (response) => {
-          this.patient_id = response.data.patient_id;
+          localStorage.setItem('patient_id', response.data.patient_id);
         },
         (error) => {
           this.error.next(error.message);
@@ -35,13 +35,16 @@ export class PatientService {
   }
 
   fetchPatients() {
+    const storedPatientId = localStorage.getItem('patient_id');
+    console.log('storedPatientId', storedPatientId);
+    this.patient_id = storedPatientId!;
     return this.http
       .post('https://dev-api.evitalrx.in/v1/fulfillment/patients/view', {
         apikey: this.apikey,
         patient_id: this.patient_id,
       })
       .pipe(
-        delay(3000),
+        delay(2000),
         map((response: any) => response.data),
         catchError((errorRes) => {
           const errorMessage =

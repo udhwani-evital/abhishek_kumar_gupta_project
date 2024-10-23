@@ -24,7 +24,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; // Import the spinner module
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +49,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; /
     MatNativeDateModule,
     MatToolbarModule,
     MatMenuModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
   ],
 
   providers: [CanDeactivateGuard],
