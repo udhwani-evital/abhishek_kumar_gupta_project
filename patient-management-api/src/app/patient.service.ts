@@ -39,7 +39,7 @@ export class PatientService {
     console.log('storedPatientId', storedPatientId);
     this.patient_id = storedPatientId!;
     return this.http
-      .post('httpss://dev-api.evitalrx.in/v1/fulfillment/patients/view', {
+      .post('https://dev-api.evitalrx.in/v1/fulfillment/patients/view', {
         apikey: this.apikey,
         patient_id: this.patient_id,
       })
