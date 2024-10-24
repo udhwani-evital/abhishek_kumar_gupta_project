@@ -1,8 +1,10 @@
-<div class="alert" *ngIf="error">
-  <span>{{ error }}</span>
-  <button class="close-button" (click)="close()">×</button>
-</div>
 
+
+<app-alert
+  [message]="error"
+  *ngIf="error"
+  (close)="onClose()"
+></app-alert>
 <div class="loading-message" *ngIf="isFetching">
   <mat-spinner
     diameter="20"

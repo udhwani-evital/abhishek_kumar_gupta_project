@@ -39,9 +39,10 @@ export class ViewPatientComponent implements OnInit, OnDestroy {
       }
     );
   }
-  close() {
+  onClose() {
     this.error = '';
   }
+
 
   ngOnDestroy() {
     this.errorSub.unsubscribe();

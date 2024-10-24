@@ -25,12 +25,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; // Import the spinner module
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AlertComponent } from './alert/alert.component';
 @NgModule({
   declarations: [
     AppComponent,
     AddPatientComponent,
     HeaderComponent,
     ViewPatientComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
