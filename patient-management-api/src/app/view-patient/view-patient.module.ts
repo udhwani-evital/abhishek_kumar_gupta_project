@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
     RouterModule.forChild([
       {
         path: '',
+
         component: ViewPatientComponent,
       },
     ]),
