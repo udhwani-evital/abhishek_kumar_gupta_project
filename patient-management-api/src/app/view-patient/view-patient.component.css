@@ -1,0 +1,68 @@
+.loading-message,
+.no-patients {
+ 
+  font-size: 18px;
+  text-align: center;
+
+  color: #555;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.card-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h2.patient-title {
+  margin: 1.5rem 0;
+  font-size: 24px;
+  text-align: center;
+}
+
+.patient-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  width: 100%;
+}
+
+.patient-card {
+  background-color: rgba(211, 211, 211, 0.373);
+  width: 100%;
+  max-width: 50rem;
+}
+
+.patient-details {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 4px 0;
+}
+
+.alert {
+  background-color: #f443365e; /* Red background */
+  color:red; /* White text */
+  padding: 16px;
+  position: fixed;
+  top: 5rem; /* Adjust as needed */
+  left: 50%;
+  transform: translate(-50%, 50%); /* Center it horizontally */
+  z-index: 1000; /* Make sure it's above other content */
+  border-radius: 4px; /* Rounded corners */
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
